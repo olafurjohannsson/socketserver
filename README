@@ -1,0 +1,3 @@
+Socket Server in C that uses select() for multiplex IO
+
+author: olafur@johannsson.co
