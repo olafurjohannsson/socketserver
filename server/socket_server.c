@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <ctype.h>
-#include "utils.h"
+#include "../utils/utils.h"
 
 #define MAXMSG 1024
 
