@@ -16,8 +16,8 @@
 
 
 void print_meta();
-void
-rawsock_list_adapters(void)
+
+void rawsock_list_adapters(void)
 {
     pcap_if_t *alldevs;
     char errbuf[PCAP_ERRBUF_SIZE];
