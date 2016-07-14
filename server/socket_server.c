@@ -16,7 +16,33 @@
 
 
 void print_meta();
+void
+rawsock_list_adapters(void)
+{
+    pcap_if_t *alldevs;
+    char errbuf[PCAP_ERRBUF_SIZE];
 
+    if (pcap_findalldevs(&alldevs, errbuf) != -1) {
+        int i;
+        pcap_if_t *d;
+        i=0;
+
+        if (alldevs == NULL) {
+            fprintf(stderr, "ERR:libpcap: no adapters found, are you sure you are root?\n");
+        }
+        /* Print the list */
+        for(d=alldevs; d; d=d->next) {
+            fprintf(stderr, " %d  %s \t", i++, d->name);
+            if (d->description)
+                fprintf(stderr, "(%s)\n", d->description);
+            else
+                fprintf(stderr, "(No description available)\n");
+        }
+        fprintf(stderr,"\n");
+    } else {
+        fprintf(stderr, "%s\n", errbuf);
+    }
+}
 struct socket_user
 {
    unsigned int port;
