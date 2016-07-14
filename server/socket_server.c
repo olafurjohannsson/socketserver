@@ -147,6 +147,34 @@ int main(int argc, char* argv[])
    return 0;
 }
 
+unsigned rawsock_get_adapter_ip(const char *ifname)
+{
+    int fd;
+    struct ifreq ifr;
+    struct sockaddr_in *sin;
+    struct sockaddr *sa;
+    int x;
+
+    fd = socket(AF_INET, SOCK_DGRAM, 0);
+
+    ifr.ifr_addr.sa_family = AF_INET;
+    strcpy_s(ifr.ifr_name, IFNAMSIZ, ifname);
+
+    x = ioctl(fd, SIOCGIFADDR, &ifr);
+    if (x < 0) {
+        fprintf(stderr, "ERROR:'%s': %s\n", ifname, strerror(errno));
+        //fprintf(stderr, "ERROR:'%s': couldn't discover IP address of network interface\n", ifname);
+        close(fd);
+        return 0;
+    }
+
+    close(fd);
+
+    sa = &ifr.ifr_addr;
+    sin = (struct sockaddr_in *)sa;
+    return ntohl(sin->sin_addr.s_addr);
+}
+
 void print_meta(struct socket_server server)
 {
    char buff[32];
