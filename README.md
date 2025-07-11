@@ -2,5 +2,5 @@
 Socket Server in C that uses select() for multiplex IO
 
 author: Ólafur Aron Jóhannsson<br>
-email: olafur@johannsson.co<br>
-website: https://olafurjohannsson.com<br>
+email: olafurjohannss@gmail.com<br>
+website: https://olafuraron.is<br>
